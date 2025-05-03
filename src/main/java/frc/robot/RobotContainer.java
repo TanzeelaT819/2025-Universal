@@ -18,6 +18,7 @@ import frc.robot.subsystems.TestMiniMotors;
 import frc.robot.subsystems.TestBlondeMotors;
 //import frc.robot.subsystems.YawProvider;
 import frc.robot.subsystems.TestTriggers;
+import frc.robot.subsystems.PID;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -30,8 +31,10 @@ import frc.robot.subsystems.TestTriggers;
  */
 public class RobotContainer {
     private final static CommandXboxController driveController = new CommandXboxController(2);
-    //private final static CommandXboxController operatorController = new CommandXboxController(3);
-    //private final static XboxController operatorHID = operatorController.getHID();
+    // private final static CommandXboxController operatorController = new
+    // CommandXboxController(3);
+    // private final static XboxController operatorHID =
+    // operatorController.getHID();
     private final static XboxController driveHID = driveController.getHID();
 
     private static LedSubsystem leds = new LedSubsystem();
@@ -50,10 +53,12 @@ public class RobotContainer {
             case Simulation:
                 break;
             case blondeMini:
-                 new DrivetrainSRX(driveHID);
-                 new NeoMotor(driveHID);
-                 //new TestBlondeMotors(driveHID, leds);
-                //new TestSlider(driveHID, leds);
+                new DrivetrainSRX(driveHID);
+                PID motorPID = new PID();
+
+                new NeoMotor(driveHID, motorPID);
+                // new TestBlondeMotors(driveHID, leds);
+                // new TestSlider(driveHID, leds);
                 break;
             case MiniSRX: // Test mini
                 // Use Talon SRX for drive train
@@ -112,7 +117,7 @@ public class RobotContainer {
     Trigger tr = new Trigger(triggers::getSwitch);
 
     private void configureButtonBindings() {
-        //operatorHID.getAButton(); // Avoids a not used problem
+        // operatorHID.getAButton(); // Avoids a not used problem
         driveController.x().onTrue(testCmd);
         driveController.back().whileTrue(new InstantCommand(new Runnable() {
             public void run() {

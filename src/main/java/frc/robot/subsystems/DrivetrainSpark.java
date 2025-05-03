@@ -60,6 +60,7 @@ public class DrivetrainSpark extends SubsystemBase {
         leftMotor = new MotorSparkMax("Left", Robot.config.driveLeft,Robot.config.driveLeftFollow, true, true, motorC);
         rightMotor.zeroEncoder();
         leftMotor.zeroEncoder();
+
     }
 
     public void setAggresiveMode() {

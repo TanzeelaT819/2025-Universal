@@ -71,6 +71,8 @@ public class Config {
     public boolean PneumaticHUB = false;
     public boolean BlinkTarget = false;
 
+    
+
     Config() {
         // MiniSRX, Squidward, Kevin, Wooly, Mando
         logf("Start of Robot Config for %s\n", robotType);
